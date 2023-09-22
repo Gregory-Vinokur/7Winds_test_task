@@ -1,0 +1,35 @@
+.sidebar {
+  border-right: 1px solid var(--border);
+  min-height: 100vh;
+  width: 23.4rem;
+}
+
+.sidebarHeader {
+  color: var(--secondary-color);
+  align-items: center;
+  padding: 0.8rem 0.7rem 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.title {
+  font-size: 1.4rem;
+}
+.subTitle {
+  font-size: 1rem;
+  line-height: 12px;
+}
+
+.sidebar li {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  padding: 0.8rem 0 0.8rem 2rem;
+}
+.sidebar li svg {
+  margin-right: 1.4rem;
+}
+.active {
+  background: var(--secondary-color);
+}

@@ -1,0 +1,14 @@
+.tableHeader {
+  display: grid;
+  grid-template-columns: 11rem 75.7rem 20rem 20rem 20rem 20rem;
+  font-size: 1.4rem;
+  color: var(--secondary-color);
+  border-bottom: 1px solid var(--border);
+}
+
+.tableHeader th {
+  padding-top: 1.1rem;
+  padding-bottom: 1.3rem;
+  justify-self: flex-start;
+  padding: 1.1rem 4.2rem 1.2rem 1.2rem;
+}

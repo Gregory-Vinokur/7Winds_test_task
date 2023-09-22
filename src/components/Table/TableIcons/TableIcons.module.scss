@@ -1,0 +1,62 @@
+.iconsContainer {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.secondLevel {
+  padding-left: 2rem;
+}
+
+.thirdLevel {
+  padding-left: 4rem;
+}
+
+.lineDown {
+  position: absolute;
+  top: 2.4rem;
+  left: 1.5rem;
+  z-index: 1;
+  display: block;
+  width: 1px;
+  height: 6.7rem;
+  background: #c6c6c6;
+}
+
+.lineDownSecondLevel {
+  left: 3.5rem;
+}
+
+.lineDownThirdLevel {
+  top: 0.65rem;
+  left: 3.5rem;
+  height: 8.5rem;
+}
+
+.lineRight {
+  position: absolute;
+  top: 50%;
+  left: 1.525rem;
+  z-index: 1;
+  display: block;
+  width: 1.25rem;
+  height: 1px;
+  background: #c6c6c6;
+}
+
+.lineRightThirdLevel {
+  left: 3.525rem;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  gap: 6px;
+  border-radius: 0.375rem;
+}
+
+.showTrash {
+  background-color: var(--border);
+}

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IResponse } from '../../interfaces/IResponse';
 import { IRow } from '../../interfaces/IRow';
+import { createRowItem, deleteRowItem, updateRowItem } from './apiSlice.service';
 
 const env = typeof process !== 'undefined' ? process.env : import.meta.env
 
@@ -18,32 +19,13 @@ export const api = createApi({
         method: 'POST',
         body: row,
       }),
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ ...row }, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
 
-          if (data && data.current) {
-            const newRow = data.current;
-
-            dispatch(api.util.updateQueryData('getTreeRows', undefined, (draft) => {
-              if (draft && draft.length === 0) {
-                draft.push(newRow);
-              } else {
-                const lastIndex = draft.length - 1;
-                if (lastIndex !== -1) {
-                  const lastItem = draft[lastIndex];
-                  if (lastItem.child && lastItem.child.length === 0) {
-                    lastItem.child.push(newRow);
-                  } else {
-                    const lastChildItem = lastItem.child[lastItem.child.length - 1];
-                    if (lastChildItem.child) {
-                      lastChildItem.child.push(newRow);
-                    }
-                  }
-                }
-              }
-            }));
-          }
+          dispatch(api.util.updateQueryData('getTreeRows', undefined, (draft) => {
+            createRowItem(draft, row.parentId, data)
+          }));
         } catch (error) {
           console.error('Произошла ошибка при создании строки:', error);
         }
@@ -55,20 +37,13 @@ export const api = createApi({
         method: 'POST',
         body: row,
       }),
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ rID }, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
 
-          if (data && data.changed && data.changed.length > 0) {
-            const updatedRow = data.changed[0];
-
-            dispatch(api.util.updateQueryData('getTreeRows', undefined, (draft) => {
-              const index = draft.findIndex((row) => row.id === updatedRow.id);
-              if (index !== -1) {
-                draft[index] = updatedRow;
-              }
-            }));
-          }
+          dispatch(api.util.updateQueryData('getTreeRows', undefined, (draft) => {
+            updateRowItem(draft, rID, data)
+          }));
         } catch (error) {
           console.error('Произошла ошибка при обновлении строки:', error);
         }
@@ -82,32 +57,9 @@ export const api = createApi({
       async onQueryStarted(rId, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          const changedItem = data.changed[0];
-          let deletedRowId: number | undefined;
-          if (data && data.changed && data.changed.length > 0) {
-            deletedRowId = changedItem.id;
-          } else {
-            deletedRowId = rId;
-          }
-
-          const findAndRemove = (draft: IRow[], idToDelete: number | undefined) => {
-            for (let i = 0; i < draft.length; i++) {
-              const row = draft[i];
-              if (row.id === idToDelete) {
-                draft.splice(i, 1);
-                return true;
-              }
-              if (row.child && row.child.length > 0) {
-                if (findAndRemove(row.child, idToDelete)) {
-                  return true;
-                }
-              }
-            }
-            return false;
-          };
 
           dispatch(api.util.updateQueryData('getTreeRows', undefined, (draft) => {
-            findAndRemove(draft, deletedRowId);
+            deleteRowItem(draft, rId, data)
           }));
         } catch (error) {
           console.error('Произошла ошибка при удалении строки:', error);
@@ -120,10 +72,3 @@ export const api = createApi({
     }),
   }),
 });
-
-export const {
-  useCreateRowMutation,
-  useUpdateRowMutation,
-  useRemoveRowMutation,
-  useGetTreeRowsQuery,
-} = api;

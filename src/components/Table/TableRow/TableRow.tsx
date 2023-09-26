@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import {
   useCreateRowMutation,
   useUpdateRowMutation,
-} from '../../../store/api/apiSlice';
+} from '../../../store/api/index';
 import { IRow } from '../../../interfaces/IRow';
 import { useDispatch } from 'react-redux';
 import { resetClientSideRows } from '../../../store/rowSlice/rowSlice';
@@ -15,11 +15,13 @@ type TableProps = {
   hasChildren?: boolean;
   row?: IRow;
   isNew?: boolean;
+  parentId?: number;
 };
 
 const TableRow = ({
   row,
   level,
+  parentId,
   isNew = false,
   hasChildren = false,
 }: TableProps) => {
@@ -53,6 +55,16 @@ const TableRow = ({
     rowData.salary,
   ]);
 
+  useEffect(() => {
+    setRowData({
+      rowName: row?.rowName.toLocaleString() || '',
+      salary: row?.salary.toLocaleString() || 0,
+      equipmentCosts: row?.equipmentCosts.toLocaleString() || 0,
+      overheads: row?.overheads.toLocaleString() || 0,
+      estimatedProfit: row?.estimatedProfit.toLocaleString() || 0,
+    });
+  }, [row]);
+
   const onToggleEdit = () => {
     setIsEdit(true);
   };
@@ -78,7 +90,7 @@ const TableRow = ({
         materials: 0,
         mimExploitation: 0,
         overheads: +rowData.overheads,
-        parentId: row?.id || null,
+        parentId: parentId || null,
         rowName: rowData.rowName,
         salary: +rowData.salary,
         supportCosts: 0,

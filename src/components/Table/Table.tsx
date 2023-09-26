@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useGetTreeRowsQuery } from '../../store/api/apiSlice';
+import { useGetTreeRowsQuery } from '../../store/api/index';
 import styles from './Table.module.scss';
 import TableHeader from './TableHeader/TableHeader';
 import TableRow from './TableRow/TableRow';
@@ -53,7 +53,15 @@ const Table = () => {
       <TableHeader />
       <tbody>
         {serverSideRows && !serverSideRows.length && (
-          <TableRow level={1} isNew={true} />
+          <TableRow
+            level={1}
+            isNew={true}
+            parentId={
+              serverSideRows
+                ? findDeepestId(serverSideRows[serverSideRows.length - 1] || {})
+                : 0
+            }
+          />
         )}
         {serverSideRows &&
           serverSideRows.map((row, i) => (
@@ -66,18 +74,25 @@ const Table = () => {
                   !!clientSideRows.length ||
                   i < serverSideRows.length - 1
                 }
+                parentId={
+                  serverSideRows
+                    ? findDeepestId(
+                        serverSideRows[serverSideRows.length - 1] || {}
+                      )
+                    : 0
+                }
               />
               {renderRows(row.child || [], 2)}
             </Fragment>
           ))}
         {!!clientSideRows.length && (
           <TableRow
-            row={{
-              ...clientSideRows[0],
-              id: serverSideRows
+            row={clientSideRows[0]}
+            parentId={
+              serverSideRows
                 ? findDeepestId(serverSideRows[serverSideRows.length - 1] || {})
-                : 0,
-            }}
+                : 0
+            }
             level={
               serverSideRows
                 ? calculateLevel(

@@ -3,14 +3,14 @@
   grid-template-columns: 11rem 75.7rem 20rem 20rem 20rem 20rem;
   align-items: center;
   justify-items: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid $border;
 }
 
 .inputNumber {
   width: 100%;
   padding: 0.625rem;
   color: #a1a1aa;
-  border: 1px solid var(--border);
+  border: 1px solid $border;
   border-radius: 0.375rem;
   transition: 0.3s;
   font-family: inherit;

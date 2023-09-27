@@ -1,4 +1,4 @@
-import Table from '../Table/Table';
+import { Table } from '../Table';
 import styles from './Main.module.scss';
 
 const Main = () => {
@@ -12,4 +12,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export { Main };

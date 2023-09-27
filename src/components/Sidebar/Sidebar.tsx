@@ -1,7 +1,7 @@
 import styles from './Sidebar.module.scss';
 import ArrowDown from '../../assets/ArrowDownIcon.svg?react';
 import ItemIcon from '../../assets/ItemIcon.svg?react';
-import { MENU_ITEMS } from '../../constants/constants';
+import { MENU_ITEMS } from './Sidebar.service';
 
 const Sidebar = () => {
   return (
@@ -25,4 +25,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export { Sidebar };

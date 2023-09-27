@@ -11,17 +11,15 @@ html {
   font-family: 'Roboto', sans-serif;
 }
 
-:root {
-  --base-color: #fff;
-  --secondary-color: #a1a1aa;
+$base-color: #fff;
+$secondary-color: #a1a1aa;
 
-  --background-dark: #202124;
-  --background-light: #27272a;
+$background-dark: #202124;
+$background-light: #27272a;
 
-  --border: #414144;
-}
+$border: #414144;
 
 body {
-  color: var(--base-color);
-  background: var(--background-light);
+  color: $base-color;
+  background: $background-light;
 }

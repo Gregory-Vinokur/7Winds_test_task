@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
 import { useGetTreeRowsQuery } from '../../store/api/index';
 import styles from './Table.module.scss';
-import TableHeader from './TableHeader/TableHeader';
-import TableRow from './TableRow/TableRow';
+import { TableHeader } from './TableHeader';
+import { TableRow } from './TableRow';
 import { IState } from '../../interfaces/IState';
 import { Fragment } from 'react';
 import { IRow } from '../../interfaces/IRow';
+import { calculateLevel, findDeepestId } from './Table.service';
 
 const Table = () => {
   const { data: serverSideRows } = useGetTreeRowsQuery();
@@ -27,26 +28,6 @@ const Table = () => {
       </Fragment>
     ));
   };
-
-  function findDeepestId(row: IRow): number | undefined {
-    if (row.child && row.child.length > 0) {
-      return row.child[0].id;
-    } else {
-      return row.id;
-    }
-  }
-
-  function calculateLevel(row: IRow): number {
-    let level = 2;
-    let currentRow = row;
-
-    while (currentRow.child && currentRow.child.length > 0) {
-      level++;
-      currentRow = currentRow.child[0];
-    }
-
-    return level;
-  }
 
   return (
     <table className={styles.table}>
@@ -108,4 +89,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export { Table };

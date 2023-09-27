@@ -1,6 +1,6 @@
-import TableCell from '../TableCell/TableCell';
+import { TableCell } from '../TableCell';
 import styles from './TableRow.module.scss';
-import TableIcons from '../TableIcons/TableIcons';
+import { TableIcons } from '../TableIcons';
 import { useState, useEffect } from 'react';
 import {
   useCreateRowMutation,
@@ -9,14 +9,7 @@ import {
 import { IRow } from '../../../interfaces/IRow';
 import { useDispatch } from 'react-redux';
 import { resetClientSideRows } from '../../../store/rowSlice/index';
-
-type TableProps = {
-  level: number;
-  hasChildren?: boolean;
-  row?: IRow;
-  isNew?: boolean;
-  parentId?: number | null;
-};
+import { TableProps } from './TableRow.types';
 
 const TableRow = ({
   row,
@@ -188,4 +181,4 @@ const TableRow = ({
   );
 };
 
-export default TableRow;
+export { TableRow };

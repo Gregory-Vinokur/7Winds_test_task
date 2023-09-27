@@ -5,13 +5,7 @@ import styles from './TableIcons.module.scss';
 import { useRemoveRowMutation } from '../../../store/api/index';
 import { useDispatch } from 'react-redux';
 import { createEmptyRow } from '../../../store/rowSlice/index';
-
-type TableIconsProps = {
-  level: number;
-  hasChildren?: boolean;
-  rId: number | undefined;
-  isEdit: boolean;
-};
+import { TableIconsProps } from './TableIcons.types';
 
 const TableIcons = ({ level, rId, hasChildren, isEdit }: TableIconsProps) => {
   const [showTrash, setShowTrash] = useState(false);
@@ -81,4 +75,4 @@ const TableIcons = ({ level, rId, hasChildren, isEdit }: TableIconsProps) => {
   );
 };
 
-export default TableIcons;
+export { TableIcons };

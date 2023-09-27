@@ -59,7 +59,7 @@ const Table = () => {
             parentId={
               serverSideRows
                 ? findDeepestId(serverSideRows[serverSideRows.length - 1] || {})
-                : 0
+                : null
             }
           />
         )}
@@ -79,7 +79,7 @@ const Table = () => {
                     ? findDeepestId(
                         serverSideRows[serverSideRows.length - 1] || {}
                       )
-                    : 0
+                    : null
                 }
               />
               {renderRows(row.child || [], 2)}
@@ -91,7 +91,7 @@ const Table = () => {
             parentId={
               serverSideRows
                 ? findDeepestId(serverSideRows[serverSideRows.length - 1] || {})
-                : 0
+                : null
             }
             level={
               serverSideRows

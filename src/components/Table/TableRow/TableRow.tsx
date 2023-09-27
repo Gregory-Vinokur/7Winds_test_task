@@ -8,14 +8,14 @@ import {
 } from '../../../store/api/index';
 import { IRow } from '../../../interfaces/IRow';
 import { useDispatch } from 'react-redux';
-import { resetClientSideRows } from '../../../store/rowSlice/rowSlice';
+import { resetClientSideRows } from '../../../store/rowSlice/index';
 
 type TableProps = {
   level: number;
   hasChildren?: boolean;
   row?: IRow;
   isNew?: boolean;
-  parentId?: number;
+  parentId?: number | null;
 };
 
 const TableRow = ({

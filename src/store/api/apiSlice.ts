@@ -24,7 +24,11 @@ export const api = createApi({
           const { data } = await queryFulfilled;
 
           dispatch(api.util.updateQueryData('getTreeRows', undefined, (draft) => {
-            createRowItem(draft, row.parentId, data)
+            if (row.parentId === null) {
+              draft.push(data.current)
+            } else {
+              createRowItem(draft, row.parentId, data)
+            }
           }));
         } catch (error) {
           console.error('Произошла ошибка при создании строки:', error);

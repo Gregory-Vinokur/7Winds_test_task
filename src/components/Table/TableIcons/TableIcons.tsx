@@ -4,7 +4,7 @@ import TrashIcon from '../../../assets/TrashIcon.svg?react';
 import styles from './TableIcons.module.scss';
 import { useRemoveRowMutation } from '../../../store/api/index';
 import { useDispatch } from 'react-redux';
-import { createEmptyRow } from '../../../store/rowSlice/rowSlice';
+import { createEmptyRow } from '../../../store/rowSlice/index';
 
 type TableIconsProps = {
   level: number;

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { api } from './api/apiSlice';
-import rowsReducer from './rowSlice/rowSlice';
+import rowsReducer from './rowSlice/index';
 
 export const store = configureStore({
   reducer: {

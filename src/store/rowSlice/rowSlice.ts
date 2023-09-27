@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IRow } from '../../interfaces/IRow';
 
-const rowsSlice = createSlice({
+export const rowsSlice = createSlice({
   name: 'rows',
   initialState: { clientSideRows: [] } as { clientSideRows: IRow[] },
   reducers: {
@@ -13,7 +13,3 @@ const rowsSlice = createSlice({
     },
   },
 });
-
-export const { createEmptyRow, resetClientSideRows } = rowsSlice.actions;
-
-export default rowsSlice.reducer;
